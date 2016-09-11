@@ -1,3 +1,7 @@
 .message-item {
   padding-top: 50px;
 }
+
+.message-header span {
+  font-size: 0.6em;
+}
