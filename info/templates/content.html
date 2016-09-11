@@ -44,6 +44,19 @@
 <div id="page-content">
   <div class="row">
     <div class="col col-lg-9">
+      <h3>Sisältö / Content</h3>
+      <ul class="list-group">
+        {% for c in categories %}
+          <li class="list-group-item header">{{ c.title }}</li>
+          {% for m in c.visible_messages %}
+            <li class="list-group-item">{{ m.header }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-lg-9">
       {% for c in categories %}
         <div class="category-divider" category="{{ c.title }}"=></div>
         {% for m in c.visible_messages %}
