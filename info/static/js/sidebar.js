@@ -2,13 +2,13 @@ $(window).resize(function() {
 	var path = $(this);
 	var contW = path.width();
 	if(contW >= 761){
-		document.getElementsByClassName("sidebar-toggle")[0].style.left="250px";
-    document.getElementById("page-content").style.marginLeft="250px";
-    document.getElementById("page-content").style.marginRight="0px";
+		document.getElementsByClassName("sidebar-toggle")[0].style.left="0px";
+    document.getElementById("page-content").style.left="250px";
+    //document.getElementById("page-content").style.marginRight="0px";
   }else{
 		document.getElementsByClassName("sidebar-toggle")[0].style.left="-250px";
-    document.getElementById("page-content").style.marginLeft="0px";
-    document.getElementById("page-content").style.marginRight="0px";
+    document.getElementById("page-content").style.left="0px";
+    //document.getElementById("page-content").style.marginRight="0px";
 	}
 });
 $(document).ready(function() {
@@ -22,15 +22,16 @@ $(document).ready(function() {
 		e.preventDefault();
 		var elem = document.getElementById("sidebar-wrapper");
 		left = window.getComputedStyle(elem,null).getPropertyValue("left");
-		if(left == "250px"){
+		if(left == "0px"){
 			document.getElementsByClassName("sidebar-toggle")[0].style.left="-250px";
-      document.getElementById("page-content").style.marginLeft="0px";
-      document.getElementById("page-content").style.marginRight="0px";
+      document.getElementById("page-content").style.left="0px";
+      //document.getElementById("page-content").style.marginRight="0px";
 		}
 		else if(left == "-250px"){
-			document.getElementsByClassName("sidebar-toggle")[0].style.left="250px";
-      document.getElementById("page-content").style.marginLeft="250px";
-      document.getElementById("page-content").style.marginRight="-250px";
+			document.getElementsByClassName("sidebar-toggle")[0].style.left="0px";
+      document.getElementById("page-content").style.left="250px";
+      //document.getElementById("page-content").style.width=(screen.width - 250).toString() + "px";
+      //document.getElementById("page-content").style.marginRight="-250px";
 		}
 	});
 });

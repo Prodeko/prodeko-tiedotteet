@@ -41,9 +41,9 @@
   </div>
 </nav>
 
+
 <div id="page-content">
-  <div class="row">
-    <div class="col col-lg-9">
+  <div id="page-content-inner">
       <div class="well">
         <p>
           Työpaikkailmoitukset löytyvät Prodekon Forumilta. Mikäli sinulla ei ole tunnuksia Prodekon nettisivuille, ota yhteyttä mediakeisariin: mediakeisari@prodeko.org.
@@ -57,11 +57,9 @@
           <span class="label label-info">N</span> = julkaistu alle 7 päivää sitten / posted under 7 days ago
         </p>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col col-lg-9">
+
+
       <div class="category-divider" category="Sisältö / Content"></div>
       <h3>Sisältö / Content</h3>
       <ul class="list-group">
@@ -84,10 +82,8 @@
           {% endfor %}
         {% endfor %}
       </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col col-lg-9">
+
+
       {% for c in categories %}
         <div class="category-divider" category="{{ c.title }}"></div>
         {% for m in c.visible_messages %}
@@ -114,7 +110,6 @@
         </div>
         {% endfor %}
       {% endfor %}
-    </div>
   </div>
 </div>
 
