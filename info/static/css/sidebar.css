@@ -50,7 +50,7 @@
   text-decoration: none;
 }
 .sidebar-nav li a:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.45);
   color: #222;
   text-decoration: none;
 }
@@ -59,7 +59,7 @@
   text-decoration: none;
 }
 .sidebar-nav li.header {
-  background-color: #ccc;
+  background-color: #ddd;
   font-weight: bold;
 }
 .sidebar-nav li.header > p {
@@ -88,6 +88,7 @@
 #page-content {
   transition: all 0.3s ease-out;
   margin-left: 0px;
+  margin-right: 0px;
   padding:20px;
 }
 
@@ -99,5 +100,6 @@
   #page-content {
     transition: 0s;
     margin-left: 250px;
+    margin-right: 0px;
   }
 }
