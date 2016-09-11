@@ -28,6 +28,13 @@ h1, h2, h3, h4, h5, h6 {
   color: #000;
 }
 
+.list-group-item p {
+  padding-left: 25px;
+}
+.list-group-item p > span {
+  margin-left: -21px;
+}
+
 /* Scrollbar styles */
 
 ::-webkit-scrollbar {
