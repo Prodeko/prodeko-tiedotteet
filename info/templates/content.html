@@ -92,12 +92,12 @@
           <h6><a href="{% url 'edit' m.pk %}">Muokkaa</a></h6>
           {% endif %}
           <h4 class="message-header">
-            {% if m.is_new %}
-            <span class="label label-info">N</span>
-            {% endif %}
             {{ m.header }}
             {% if m.deadline_date|is_past and m.show_deadline %}
               <i class="text-muted" style="font-size:0.7em;">(DL passed)</i>
+            {% endif %}
+            {% if m.is_new %}
+            <span class="label label-info">N</span>
             {% endif %}
           </h4>
           {% if m.show_deadline %}
