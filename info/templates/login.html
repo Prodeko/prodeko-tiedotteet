@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block body %}
+
+
+{% if not user.is_authenticated %}
+	<div class="site-wrapper">
+		<div id="login" class="site-wrapper-inner">
+			<h2>Kirjaudu sisään</h2><br>
+			<form id="" method="post" action="{% url 'login_view_url' %}">
+				{% csrf_token %} 
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					{{ form.errors }}
+				</div>
+				{% endif %}
+				<p><input id="id_username" type="text" name="username" placeholder="Käyttäjä" maxlength="30" /></p>
+				<p><input type="password" name="password" placeholder="Salasana" id="id_password" /></p>
+				<input type="submit" value="Kirjaudu" class="btn btn-lg btn-default" />
+				<input type="hidden" name="next" value="" />
+			</form>
+		</div>
+	</div>
+{% else %}
+	<h2>Kirjautunut: {{ user.username }}</h2>
+	<p><a href="/publisher/">Hallitse tiedotteita</a></p>
+	<p><a href="/logout/">Kirjaudu ulos</a></p>
+{% endif %}
+
+<p><a href="/">Etusivu</a></p>
+
+{% endblock %}

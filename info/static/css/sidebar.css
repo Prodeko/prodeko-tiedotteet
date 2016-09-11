@@ -1,0 +1,93 @@
+.navbar {
+  background-color: #3F51B5;
+}
+.navbar-default {
+    border: none;
+    border-radius: 0px;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #ddd;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #C5CAE9;
+}
+#sidebar-wrapper {
+  top: 50px;
+  left: -250px;
+  width: 250px;
+  background-color: #3F51B5;
+  color: white;
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  overflow-y: scroll;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 0px;
+  line-height: 50px;
+  border-bottom: 1px solid #303F9F;
+}
+.sidebar-nav li a {
+  color: white;
+  display: block;
+  text-decoration: none;
+}
+.sidebar-nav li a:hover {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  text-decoration: none;
+}
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  background: rgba(255,255,255,0.25);
+  text-decoration: none;
+}
+.sidebar-nav li.header {
+  background-color: #303F9F;
+  font-weight: bold;
+}
+.sidebar-nav li.header > p {
+  line-height: 20px;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0px;
+}
+.sidebar-nav li a > p {
+  line-height: 20px;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin: 0px;
+}
+#sidebar-wrapper.sidebar-toggle {
+  transition: all 0.3s ease-out;
+  margin-left: -250px;
+}
+#page-content {
+  transition: all 0.3s ease-out;
+  margin-left: 0px;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper.sidebar-toggle {
+    transition: 0s;
+    left: 250px;
+  }
+  #page-content {
+    transition: 0s;
+    margin-left: 250px;
+  }
+}

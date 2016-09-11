@@ -1,0 +1,6 @@
+*.pyc
+*.db
+/.vagrant/
+*.csv
+.DS_Store
+db.sqlite3
