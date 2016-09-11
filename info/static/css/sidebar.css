@@ -1,5 +1,8 @@
 .navbar {
   background-color: #3F51B5;
+  -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
 }
 .navbar-default {
     border: none;
@@ -18,12 +21,15 @@
   top: 50px;
   left: -250px;
   width: 250px;
-  background-color: #3F51B5;
-  color: white;
+  background-color: #eee;
+  color: #222;
   position: fixed;
   height: 100%;
   z-index: 1;
   overflow-y: scroll;
+  -webkit-box-shadow: 0.5px 0px 4px 0.5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0.5px 0px 4px 0.5px rgba(0,0,0,0.75);
+  box-shadow: 0.5px 0px 4px 0.5px rgba(0,0,0,0.75);
 }
 .sidebar-nav {
   position: absolute;
@@ -36,16 +42,16 @@
 .sidebar-nav li {
   text-indent: 0px;
   line-height: 50px;
-  border-bottom: 1px solid #303F9F;
+  border-bottom: 1px solid #ccc;
 }
 .sidebar-nav li a {
-  color: white;
+  color: #222;
   display: block;
   text-decoration: none;
 }
 .sidebar-nav li a:hover {
   background: rgba(255,255,255,0.25);
-  color: white;
+  color: #222;
   text-decoration: none;
 }
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
@@ -53,7 +59,7 @@
   text-decoration: none;
 }
 .sidebar-nav li.header {
-  background-color: #303F9F;
+  background-color: #ccc;
   font-weight: bold;
 }
 .sidebar-nav li.header > p {
@@ -79,6 +85,7 @@
 #page-content {
   transition: all 0.3s ease-out;
   margin-left: 0px;
+  padding:20px;
 }
 
 @media (min-width: 768px) {
