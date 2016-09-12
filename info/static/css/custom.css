@@ -16,7 +16,6 @@ p {
 .message-item {
   padding-top: 50px;
   border-bottom: 1px solid #ccc;
-  margin-bottom: -35px;
 }
 .message-header {
   color: #000;
@@ -26,7 +25,7 @@ p {
 }
 
 .list-group-item {
-  padding: 3px 15px;
+  padding: 1px 5px;
 }
 .list-group-item.header {
   background-color: #ddd;
@@ -39,6 +38,8 @@ p {
 }
 .list-group-item p {
   padding-left: 25px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .list-group-item p > span {
   margin-left: -21px;

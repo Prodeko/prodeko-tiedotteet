@@ -28,10 +28,12 @@
             {% for m in c.visible_messages %}
               <li>
                 <a href="#{{ m.pk }}">
-                  {% if m.is_new %}
+                  <p>
+                    {% if m.is_new %}
                     <span class="label label-info">N</span>
-                  {% endif %}
-                  {{ m.header }}
+                    {% endif %}
+                    {{ m.header }}
+                  </p>
                 </a>
               </li>
             {% endfor %}
@@ -40,11 +42,7 @@
     </div>
     <div class="main-content">
         <div class="swipe-area"></div>
-        <a href="#" data-toggle=".container" id="sidebar-toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </a>
+
         <div class="content">
 
           <div class="row">
@@ -74,7 +72,7 @@
                   <li class="list-group-item header">{{ c.title }}</li>
                   {% for m in c.visible_messages %}
                     <li class="list-group-item">
-                      <a href="#{{ m.pk }}">
+                      <a href="#{{ m.pk }}" >
                         <p>
                           {% if m.is_new %}
                           <span class="label label-info">N</span>
@@ -99,9 +97,8 @@
                 {% for m in c.visible_messages %}
                 <div id="{{ m.pk }}" class="message-item">
                   {% if user.is_authenticated %}
-                    <h6><a href="{% url 'edit' m.pk %}">Muokkaa</a></h6>
+                  <h6><a href="{% url 'edit' m.pk %}">Muokkaa</a></h6>
                   {% endif %}
-
                   <h4 class="message-header">
                     {{ m.header }}
                     {% if m.deadline_date|is_past and m.show_deadline %}
@@ -111,13 +108,12 @@
                     <span class="label label-info">N</span>
                     {% endif %}
                   </h4>
-
                   {% if m.show_deadline %}
                     <h6 class="date">DL {{ m.deadline_date|date:"d.m.Y" }}</h6>
                   {% endif %}
-
                   <div class="message-content">
                     {% autoescape off %}{{ m.content|emailaddress }}{% endautoescape %}
+
                   </div>
                 </div>
                 {% endfor %}
@@ -125,9 +121,9 @@
             </div>
           </div>
 
-
         </div>
     </div>
 </div>
+
 
 {% endblock %}
