@@ -108,7 +108,7 @@ body, html {
   margin: 0px;
 }
 #sidebar ul li a {
-    padding: 5px 20px;
+    padding: 5px 10px 5px 30px;
     color: #222;
     text-decoration: none;
     display: block;
@@ -122,6 +122,9 @@ body, html {
 #sidebar ul li:hover a {
   background: rgba(255,255,255,0.45);
   color: #222;
+}
+#sidebar ul li a > span {
+  margin-left: -25px;
 }
 
 .main-content .content{
