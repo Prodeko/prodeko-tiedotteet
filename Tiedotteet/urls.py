@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -7,12 +8,15 @@ from info import views, views_api
 
 urlpatterns = patterns('',
 
+	# Authentication
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+
+	# ckeditor
 	(r'^ckeditor/', include('ckeditor.urls')),
+
 	# Admin
 	url(r'^admin/', include(admin.site.urls)),
-
-	url(r'^$', views.index, name='index'),
-    url(r'^login/', views.login, name='login'),
 	url(r'^new/$', views.new, name='new'),
 
 	# Control panel
@@ -25,15 +29,11 @@ urlpatterns = patterns('',
 	url(r'^cp/categories/$', login_required(views.categories), name='categories'),
 	url(r'^cp/categories/new/$', login_required(views.new_category), name='new_category'),
 
-	#
+	# index
+	url(r'^$', views.index, name='index'),
+
+	# email
 	url(r'^email/', views.email),
-
-    # Login form
-	url(r'^loginaction/$', require_POST(views.LoginView.as_view(template_name="login.html")), name='login_view_url'),
-
-	url(r'^logout/$', 'django.contrib.auth.views.logout',
-                          {'next_page': '/login/'}),
-
 
 	# API
 	url(r'^api/content/$', views_api.ContentList.as_view()),

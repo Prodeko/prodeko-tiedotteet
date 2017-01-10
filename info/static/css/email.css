@@ -4,7 +4,7 @@ h1.email {
 	margin:0;
 	padding:0;
 	font-family: Calibri;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	text-decoration: underline;
 }
@@ -13,5 +13,9 @@ h2.email, span.email, .email-content {
 	margin:0;
 	padding:0;
 	font-family: Calibri;
-	font-size: 11px;
+	font-size: 12px;
+}
+
+.email-content p {
+	font-size: 12px;
 }
