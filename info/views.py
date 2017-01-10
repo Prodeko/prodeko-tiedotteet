@@ -146,30 +146,19 @@ def edit_message(request, pk):
 			'messages': messages,
 		}, context_instance=RequestContext(request))
 
+def new_message(request):
+	""" handle form submits for publishing new message """
+	form = PublishForm()
+	if request.method == 'POST':
+		form = PublishForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect(control_panel)
+	return render_to_response('control/cp.html',{
+			'form': form,
+		}, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/login/')
 def send_email_letter(request):
 	pass
-
-
-class PublishFormView(FormView):
-	""" handle form submits for publishing new message """
-	template_name = 'control/cp.html'
-	form_class = PublishForm
-	success_url = '/cp/'
-	form_valid_message = 'Validi'
-	form_invalid_message = 'Invalidi'
-
-	def form_valid(self, form):
-		message = Message(
-					header=form.cleaned_data['header'],
-					content=form.cleaned_data['content'],
-					category=form.cleaned_data['category'],
-					start_date=form.cleaned_data['start_date'],
-					end_date=form.cleaned_data['end_date'],
-					deadline_date=form.cleaned_data['deadline_date'],
-					show_deadline=form.cleaned_data['show_deadline'],
-					visible=form.cleaned_data['visible']
-			)
-		message.save()
-		return HttpResponseRedirect(self.get_success_url())
