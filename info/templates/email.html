@@ -6,7 +6,7 @@
 	<br>
 	<h1 class="email">{{ forloop.counter }}. {{ c.title }}</h1>
 	{% for m in c.visible_messages %}
-		<h2 class="email"><a href="#{{ m.id }}">{{ forloop.parentloop.counter }}-{{ forloop.counter }} {{ m.header }}</a></h2>
+		<h2 class="email">{{ forloop.parentloop.counter }}-{{ forloop.counter }} {{ m.header }}</h2>
 	{% endfor %}
 {% endfor %}
 

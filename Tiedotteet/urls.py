@@ -15,9 +15,8 @@ urlpatterns = patterns('',
 	# ckeditor
 	(r'^ckeditor/', include('ckeditor.urls')),
 
-	# Admin
-	url(r'^admin/', include(admin.site.urls)),
-	url(r'^new/$', views.new, name='new'),
+	# Django Admin
+	url(r'^super-admin/', include(admin.site.urls)),
 
 	# Control panel
 	url(r'^cp/$', login_required(views.control_panel)),

@@ -14,16 +14,10 @@ from info.forms import *
 
 
 def index(request):
+	""" the public main page """
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('content.html',{
-			'categories': categories
-		}, context_instance=RequestContext(request))
-
-def new(request):
-	visible_messages = Message.visible_objects.order_by('end_date')
-	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
-	return render_to_response('new.html',{
 			'categories': categories
 		}, context_instance=RequestContext(request))
 
