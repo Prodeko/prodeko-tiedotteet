@@ -12,6 +12,11 @@
 
             <div class="container-fluid">
 
+
+                {% for key, value in messages.items %}
+                  <h5 class="alert alert-{{ key }}">{{ value }}</h5>
+                {% endfor %}
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -23,7 +28,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-10">
-                        <form role="form" action="/cp/publish/" method="post" >
+                        <form role="form" action="{% url 'cp' %}" method="post" >
                       		<div class="form-group col col-md-6">
                       			<label>{{ form.header.label }}</label>
                       			{{ form.header }}

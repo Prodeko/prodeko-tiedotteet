@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.contrib import messages
 
 from info.models import *
 from info.forms import *
@@ -23,9 +24,15 @@ def index(request):
 
 @login_required(login_url='/login/')
 def control_panel(request):
-	""" control panel site for publishers """
+	""" site for publishing new messages """
 	form = PublishForm()
 	latest_messages = Message.objects.filter(visible=True).order_by('-pk')[:10]
+	if request.method == 'POST':
+		form = PublishForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Uusi tiedote tallennettu')
+			return redirect(control_panel)
 	return render_to_response('control/cp.html',{
 			'form': form,
 			'latest_messages': latest_messages,
@@ -144,18 +151,6 @@ def edit_message(request, pk):
 	return render_to_response('control/editor.html',{
 			'form': form,
 			'messages': messages,
-		}, context_instance=RequestContext(request))
-
-def new_message(request):
-	""" handle form submits for publishing new message """
-	form = PublishForm()
-	if request.method == 'POST':
-		form = PublishForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect(control_panel)
-	return render_to_response('control/cp.html',{
-			'form': form,
 		}, context_instance=RequestContext(request))
 
 
