@@ -2,11 +2,11 @@ from django.shortcuts import render, render_to_response, redirect, HttpResponseR
 from django.conf import settings
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.views.generic import DetailView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 
 from info.models import *
@@ -21,7 +21,9 @@ def index(request):
 			'categories': categories
 		}, context_instance=RequestContext(request))
 
+@login_required(login_url='/login/')
 def control_panel(request):
+	""" control panel site for publishers """
 	form = PublishForm()
 	latest_messages = Message.objects.filter(visible=True).order_by('-pk')[:10]
 	return render_to_response('control/cp.html',{
@@ -29,7 +31,9 @@ def control_panel(request):
 			'latest_messages': latest_messages,
 		}, context_instance=RequestContext(request))
 
+@login_required(login_url='/login/')
 def control_messages(request, filter, category):
+	""" control panel - list messages """
 	if filter == 'now':
 		messages = Message.objects.filter(end_date__gte=timezone.now()).order_by('-pk')
 		filter_label = 'Nykyiset'
@@ -71,7 +75,9 @@ def control_messages(request, filter, category):
 			'filter_label': filter_label,
 		}, context_instance=RequestContext(request))
 
+@login_required(login_url='/login/')
 def categories(request):
+	""" control panel - edit categories """
 	categories = Category.objects.all()
 	cforms = [CategoryForm(prefix=str(x), instance=x) for x in categories]
 	nform = CategoryForm()
@@ -89,7 +95,9 @@ def categories(request):
 			'nform':nform,
 		}, context_instance=RequestContext(request))
 
+@login_required(login_url='/login/')
 def new_category(request):
+	""" control panel - add new category """
 	if request.method == "POST":
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -98,18 +106,21 @@ def new_category(request):
 
 
 def email(request):
+	""" email template """
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('email.html',{
  		'categories': categories
  		}, context_instance=RequestContext(request))
 
+@login_required(login_url='/login/')
 def delete_message(request, pk):
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
 		message.delete()
 	return redirect('/cp/messages/all/all/')
 
+@login_required(login_url='/login/')
 def hide_message(request, pk):
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
@@ -120,7 +131,7 @@ def hide_message(request, pk):
 		message.save()
 	return redirect('/cp/messages/all/all/')
 
-
+@login_required(login_url='/login/')
 def edit_message(request, pk):
 	form = EditForm(instance=get_object_or_404(Message, pk=pk))
 	messages = {}
@@ -136,8 +147,13 @@ def edit_message(request, pk):
 		}, context_instance=RequestContext(request))
 
 
+@login_required(login_url='/login/')
+def send_email_letter(request):
+	pass
+
 
 class PublishFormView(FormView):
+	""" handle form submits for publishing new message """
 	template_name = 'control/cp.html'
 	form_class = PublishForm
 	success_url = '/cp/'

@@ -19,14 +19,14 @@ urlpatterns = patterns('',
 	url(r'^super-admin/', include(admin.site.urls)),
 
 	# Control panel
-	url(r'^cp/$', login_required(views.control_panel)),
-	url(r'^cp/messages/(?P<pk>\d+)/edit/$', login_required(views.edit_message), name="edit"),
-	url(r'^cp/messages/(?P<pk>\d+)/delete/$', login_required(views.delete_message)),
-	url(r'^cp/messages/(?P<pk>\d+)/hide/$', login_required(views.hide_message), name="delete"),
+	url(r'^cp/$', views.control_panel, name="cp"),
+	url(r'^cp/messages/(?P<pk>\d+)/edit/$', views.edit_message, name="edit"),
+	url(r'^cp/messages/(?P<pk>\d+)/delete/$', views.delete_message),
+	url(r'^cp/messages/(?P<pk>\d+)/hide/$', views.hide_message, name="delete"),
 	url(r'^cp/publish/$', require_POST(views.PublishFormView.as_view()), name='publish'),
-	url(r'^cp/messages/(?P<filter>\w+)/(?P<category>\w+)/$', login_required(views.control_messages)),
-	url(r'^cp/categories/$', login_required(views.categories), name='categories'),
-	url(r'^cp/categories/new/$', login_required(views.new_category), name='new_category'),
+	url(r'^cp/messages/(?P<filter>\w+)/(?P<category>\w+)/$', views.control_messages),
+	url(r'^cp/categories/$', views.categories, name='categories'),
+	url(r'^cp/categories/new/$', views.new_category, name='new_category'),
 
 	# index
 	url(r'^$', views.index, name='index'),
