@@ -6,7 +6,7 @@
 		    <meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>{% block title %}Infokilke - Control Panel{% endblock %}</title>
+			<title>{% block title %}Tiedotteet - Control Panel{% endblock %}</title>
 
 			<!-- Bootstrap Core CSS -->
 	    <link href="{% static 'control/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -60,6 +60,9 @@
 											<li>
 		                      <a href="/cp/"><i class="fa fa-fw fa-edit"></i> Julkaise</a>
 		                  </li>
+											<li>
+													<a href="{% url 'control_panel_email' %}"><i class="fa fa-fw fa-envelope"></i> Sähköpostin lähetys</a>
+											</li>
 											<li>
 													<a href="{% url 'categories' %}"><i class="fa fa-fw fa-pie-chart"></i> Kategoriat</a>
 											</li>

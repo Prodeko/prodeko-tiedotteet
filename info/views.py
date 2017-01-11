@@ -1,14 +1,15 @@
 from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect, get_object_or_404, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponseForbidden, JsonResponse
 from django.conf import settings
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.views.generic.edit import FormView
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.core.mail.backends.smtp import EmailBackend
 
 from info.models import *
 from info.forms import *
@@ -155,5 +156,50 @@ def edit_message(request, pk):
 
 
 @login_required(login_url='/login/')
-def send_email_letter(request):
-	pass
+def control_panel_email(request):
+	""" control panel - send email page for sending emails and editing mail configurations """
+	config, created = MailConfiguration.objects.get_or_create(pk=1)
+	config_form = MailConfigurationForm(instance=config)
+	send_form = SendEmailForm()
+	if request.method == "POST":
+		config_form = MailConfigurationForm(request.POST, instance=config)
+		if config_form.is_valid():
+			config_form.save()
+			return redirect(control_panel_email)
+	return render_to_response('control/email.html',{
+			'config': config,
+			'config_form': config_form,
+			'send_form': send_form,
+		}, context_instance=RequestContext(request))
+
+@login_required(login_url='/login/')
+def send_email(request):
+	""" send infro letter via email """
+	if request.method == "POST":
+		form = SendEmailForm(request.POST)
+		if form.is_valid():
+			config = MailConfiguration.objects.get(pk=1)
+			backend = EmailBackend(
+				host=config.host,
+				port=config.port,
+				username=config.username,
+				password=config.password,
+				use_tls=config.use_tls,
+				fail_silently=config.fail_silently
+			)
+			email = EmailMessage(
+				subject=form.cleaned_data["subject"],
+				body="sisältö",
+				from_email=config.username,
+				to=form.cleaned_data["to"].split(","),
+		        connection=backend
+			)
+			email.send()
+			return JsonResponse({
+	            'success' : True,
+	        })
+		return JsonResponse({
+			'success' : False,
+			'errors': dict(form.errors.items()),
+		})
+	return HttpResponseForbidden()

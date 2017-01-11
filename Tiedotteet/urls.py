@@ -26,11 +26,13 @@ urlpatterns = patterns('',
 	url(r'^cp/messages/(?P<filter>\w+)/(?P<category>\w+)/$', views.control_messages),
 	url(r'^cp/categories/$', views.categories, name='categories'),
 	url(r'^cp/categories/new/$', views.new_category, name='new_category'),
+	url(r'^cp/email/$', views.control_panel_email, name="control_panel_email"),
+	url(r'^cp/email/send/$', views.send_email, name="send_email"),
 
 	# index
 	url(r'^$', views.index, name='index'),
 
-	# email
+	# email template
 	url(r'^email/', views.email),
 
 	# API

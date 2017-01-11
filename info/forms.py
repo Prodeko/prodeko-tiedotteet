@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import Form, ModelForm, TextInput, Textarea, DateField, Select, CheckboxInput, CharField, NumberInput
+from django.forms import Form, ModelForm, TextInput, Textarea, DateField, Select, CheckboxInput, CharField, NumberInput, PasswordInput
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import AdminDateWidget
-from info.models import Message, Category
+from info.models import Message, Category, MailConfiguration
 
 class PublishForm(ModelForm):
 	class Meta:
@@ -69,3 +69,27 @@ class CategoryForm(ModelForm):
 			'title': TextInput(attrs={'class': 'form-control'}),
 			'order': NumberInput(attrs={'class': 'form-control'}),
 		}
+
+
+class MailConfigurationForm(ModelForm):
+	class Meta:
+		model = MailConfiguration
+		fields = ['host', 'port', 'username', 'password', 'use_tls']
+		labels = {
+			'host': _('Palvelin (host)'),
+			'port': _('Portti'),
+			'username': _('Käyttäjätunnus (sähköpostiosoite)'),
+			'password': _('Salasana'),
+			'use_tls': _('TLS salaus päällä'),
+		}
+		widgets = {
+			'host': TextInput(attrs={'class': 'form-control'}),
+			'port': NumberInput(attrs={'class': 'form-control'}),
+			'username': TextInput(attrs={'class': 'form-control'}),
+			'password': PasswordInput(attrs={'class': 'form-control'}),
+			'use_tls': CheckboxInput(),
+		}
+
+class SendEmailForm(Form):
+	subject = CharField(widget=TextInput(attrs={'class': 'form-control'}), label="Otsikko")
+	to = CharField(widget=TextInput(attrs={'class': 'form-control'}), label="Vastaanottajat (erottele pilkulla)")

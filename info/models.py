@@ -4,6 +4,16 @@ from django.utils.encoding import smart_str
 from django.utils import timezone
 
 
+class MailConfiguration(models.Model):
+	""" configuration for email backend """
+	host = models.CharField(max_length=50, default="mail.aalto.fi")
+	port = models.CharField(max_length=10, default="587")
+	username = models.CharField(max_length=50, default="tiedottaja@aalto.fi")
+	password = models.CharField(max_length=50, default="salasana")
+	use_tls = models.BooleanField(default=True)
+	fail_silently = models.BooleanField(default=True)
+
+
 class Category(models.Model):
 	title = models.CharField(max_length=150, blank=True, null=True)
 	order = models.IntegerField(default=0, blank=True, null=True)
