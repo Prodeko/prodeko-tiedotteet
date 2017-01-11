@@ -8,8 +8,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.core.mail.backends.smtp import EmailBackend
+
 
 from info.models import *
 from info.forms import *
@@ -187,13 +188,14 @@ def send_email(request):
 				use_tls=config.use_tls,
 				fail_silently=config.fail_silently
 			)
-			email = EmailMessage(
+			email = EmailMultiAlternatives(
 				subject=form.cleaned_data["subject"],
 				body="sisältö",
 				from_email=config.username,
 				to=form.cleaned_data["to"].split(","),
 		        connection=backend
 			)
+			email.attach_alternative(form.cleaned_data["body"], "text/html")
 			email.send()
 			return JsonResponse({
 	            'success' : True,
