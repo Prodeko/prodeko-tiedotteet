@@ -6,6 +6,7 @@ from django.template.loader import render_to_string, get_template
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
+from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
@@ -187,6 +188,7 @@ def send_email(request):
 			context = Context({
 				'categories': categories,
 			})
+			text_content = strip_tags(template.render(context))
 			html_content = template.render(context)
 			# backend configuration
 			backend = EmailBackend(
@@ -200,7 +202,7 @@ def send_email(request):
 			# create the email
 			email = EmailMultiAlternatives(
 				subject=form.cleaned_data["subject"],
-				body="Alternative text content",
+				body=text_content,
 				from_email=config.username,
 				to=form.cleaned_data["to"].split(","),
 		        connection=backend
