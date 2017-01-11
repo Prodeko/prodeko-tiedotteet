@@ -14,7 +14,8 @@
     </div>
     <div class="row">
       <div class="col col-md-8">
-        <h4>Asetukset <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#email-settings">Muokkaa <i class="fa fa-edit"></i></a></h4>
+        <p class="pull-right"><a type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#email-settings">Muokkaa asetuksia</a></p>
+        <p>Lähettävän palvelimen asetukset</p>
         <table class="table table-bordered">
           <tr>
             <td>Palvelin</td>
@@ -47,14 +48,11 @@
             <label for="{{ send_form.to.id_for_label }}">{{ send_form.to.label }}:</label>
             {{ send_form.to }}
           </div>
-          <div class="form-group">
-            <label for="{{ send_form.body.id_for_label }}">{{ send_form.body.label }}:</label>
-            {{ send_form.body }}
-          </div>
           <hr>
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="submit" class="btn btn-info btn-lg">Lähetä sähköposti</button>
+              <a href="{% url 'email' %}" class="btn btn-default btn-lg">Esikatselu</a>
+              <button type="submit" class="btn btn-success btn-lg">Lähetä sähköposti</button>
             </div>
           </div>
         </form>

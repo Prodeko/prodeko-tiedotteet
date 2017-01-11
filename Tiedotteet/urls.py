@@ -33,7 +33,7 @@ urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
 
 	# email template
-	url(r'^email/', views.email),
+	url(r'^email/', views.email, name='email'),
 
 	# API
 	url(r'^api/content/$', views_api.ContentList.as_view()),

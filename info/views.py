@@ -1,8 +1,8 @@
 from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect, get_object_or_404, HttpResponse
 from django.http import HttpResponseNotFound, HttpResponseForbidden, JsonResponse
 from django.conf import settings
-from django.template import RequestContext
-from django.template.loader import render_to_string
+from django.template import RequestContext, Context
+from django.template.loader import render_to_string, get_template
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
@@ -179,7 +179,16 @@ def send_email(request):
 	if request.method == "POST":
 		form = SendEmailForm(request.POST)
 		if form.is_valid():
+			# create html body
+			visible_messages = Message.visible_objects.order_by('end_date')
+			categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 			config = MailConfiguration.objects.get(pk=1)
+			template = get_template('email.html')
+			context = Context({
+				'categories': categories,
+			})
+			html_content = template.render(context)
+			# backend configuration
 			backend = EmailBackend(
 				host=config.host,
 				port=config.port,
@@ -188,14 +197,17 @@ def send_email(request):
 				use_tls=config.use_tls,
 				fail_silently=config.fail_silently
 			)
+			# create the email
 			email = EmailMultiAlternatives(
 				subject=form.cleaned_data["subject"],
-				body="sisältö",
+				body="Alternative text content",
 				from_email=config.username,
 				to=form.cleaned_data["to"].split(","),
 		        connection=backend
 			)
-			email.attach_alternative(form.cleaned_data["body"], "text/html")
+			# attach html content
+			email.attach_alternative(html_content, "text/html")
+			# send
 			email.send()
 			return JsonResponse({
 	            'success' : True,

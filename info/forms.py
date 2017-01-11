@@ -93,4 +93,3 @@ class MailConfigurationForm(ModelForm):
 class SendEmailForm(Form):
 	subject = CharField(widget=TextInput(attrs={'class': 'form-control'}), label="Otsikko")
 	to = CharField(widget=TextInput(attrs={'class': 'form-control'}), label="Vastaanottajat (erottele pilkulla)")
-	body = CharField(widget=TextInput(attrs={'class': 'form-control'}), label="Sisältö")
