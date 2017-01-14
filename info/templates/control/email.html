@@ -1,5 +1,5 @@
 {% extends "control/base.html" %}
-
+{% load staticfiles %}
 {% block body %}
 <div id="page-wrapper">
   <div class="container-fluid">
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col col-md-8">
-        <form class="" action="{% url 'send_email' %}" method="post">
+        <form class="send-email-form" action="{% url 'send_email' %}" method="post">
           {% csrf_token %}
           <div class="form-group">
             <label for="{{ send_form.subject.id_for_label }}">{{ send_form.subject.label }}:</label>
@@ -52,7 +52,10 @@
           <div class="form-group">
             <div class="col-sm-12">
               <a href="{% url 'email' %}" class="btn btn-default btn-lg">Esikatselu</a>
-              <button type="submit" class="btn btn-success btn-lg">Lähetä sähköposti</button>
+              <button id="email-submit-button" type="submit" class="btn btn-success btn-lg">
+                Lähetä sähköposti
+              </button>
+              <img id="email-spinner" class="hidden" src="{% static 'img/loading.svg' %}" style="width:30px;">
             </div>
           </div>
         </form>
@@ -114,4 +117,5 @@
 
   </div>
 </div>
+
 {% endblock %}
