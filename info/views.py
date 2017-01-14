@@ -210,10 +210,16 @@ def send_email(request):
 			# attach html content
 			email.attach_alternative(html_content, "text/html")
 			# send
-			email.send()
-			return JsonResponse({
-	            'success' : True,
-	        })
+			try:
+				email.send()
+				return JsonResponse({
+		            'success' : True,
+		        })
+			except:
+				return JsonResponse({
+					'success' : False,
+					'errors': {'mail':'failed to send'},
+				})
 		return JsonResponse({
 			'success' : False,
 			'errors': dict(form.errors.items()),

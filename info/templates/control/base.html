@@ -118,19 +118,20 @@
 		<script>
 		$(document).ready(function(){
 			$(".send-email-form").submit(function(event){
-				console.log("sub");
+				$("#email-spinner").removeClass("hidden");
 				event.preventDefault();
 		    $(".error").remove();
-				$("#email-spinner").removeClass("hidden");
-				$("#email-submit-button").addClass("disabled");
 		    var response = submitForm($(this).id, $(this).attr("action"), $(this).serialize());
-		    if (response.success) {
+				if (response.success) {
 		      location.reload();
 		    } else {
 					$("#email-spinner").addClass("hidden");
 					$("#email-submit-button").removeClass("disabled");
 		      for (var key in response.errors) {
-		        var errorElement = '<div class="error alert alert-danger">'+response.errors[key]+'</div>'
+						if (key == 'mail') {
+							$(".send-email-form").parent().prepend("<div class='error alert alert-danger'>Sähköpostin lähetys epäonnistui</div>")
+						}
+						var errorElement = '<div class="error alert alert-danger">'+response.errors[key]+'</div>'
 		        $('input[name='+key+']').after(errorElement);
 		      }
 		    };
