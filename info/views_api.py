@@ -5,11 +5,21 @@ from rest_framework import serializers
 from info.models import *
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ['title']
+
 class MessageSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField()
+    tags = serializers.SerializerMethodField()
     class Meta:
         model = Message
         fields = ('__all__')
+
+    def get_tags(self, message):
+        queryset = message.tags.all()
+        return queryset.values_list("title", flat=True)
 
 class CategorySerializer(serializers.ModelSerializer):
     messages = serializers.SerializerMethodField()

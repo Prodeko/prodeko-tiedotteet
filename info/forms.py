@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.forms import Form, ModelForm, TextInput, Textarea, DateField, Select, CheckboxInput, CharField, NumberInput, PasswordInput
+from django.forms import Form, ModelForm, TextInput, Textarea, DateField, Select, CheckboxInput, CharField, NumberInput, PasswordInput, SelectMultiple
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import AdminDateWidget
 from info.models import Message, Category, Tag, MailConfiguration
@@ -56,7 +56,8 @@ class EditForm(ModelForm):
 			'end_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'deadline_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'category': Select(attrs={'class': 'form-control'}),
-			'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
+			'tags': SelectMultiple(attrs={'class': 'form-control'}),
+			#'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
 			'show_deadline': CheckboxInput(),
 			'visible': CheckboxInput(),
 		}
