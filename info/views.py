@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.utils.html import strip_tags
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail.backends.smtp import EmailBackend
@@ -25,9 +24,10 @@ def index(request):
 			'categories': categories
 		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def control_panel(request):
 	""" site for publishing new messages """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	form = PublishForm()
 	latest_messages = Message.objects.filter(visible=True).order_by('-pk')[:10]
 	if request.method == 'POST':
@@ -41,9 +41,10 @@ def control_panel(request):
 			'latest_messages': latest_messages,
 		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def control_messages(request, filter, category):
 	""" control panel - list messages """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	if filter == 'now':
 		messages = Message.objects.filter(end_date__gte=timezone.now()).order_by('-pk')
 		filter_label = 'Nykyiset'
@@ -85,9 +86,10 @@ def control_messages(request, filter, category):
 			'filter_label': filter_label,
 		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def categories(request):
 	""" control panel - edit categories """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	categories = Category.objects.all()
 	cforms = [CategoryForm(prefix=str(x), instance=x) for x in categories]
 	nform = CategoryForm()
@@ -105,9 +107,10 @@ def categories(request):
 			'nform':nform,
 		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def new_category(request):
 	""" control panel - add new category """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	if request.method == "POST":
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -117,21 +120,25 @@ def new_category(request):
 
 def email(request):
 	""" email template """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('email.html',{
  		'categories': categories
  		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def delete_message(request, pk):
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
 		message.delete()
 	return redirect('/cp/messages/all/all/')
 
-@login_required(login_url='/login/')
 def hide_message(request, pk):
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
 		if message.visible:
@@ -141,8 +148,9 @@ def hide_message(request, pk):
 		message.save()
 	return redirect('/cp/messages/all/all/')
 
-@login_required(login_url='/login/')
 def edit_message(request, pk):
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	form = EditForm(instance=get_object_or_404(Message, pk=pk))
 	messages = {}
 	if request.method == 'POST':
@@ -157,9 +165,10 @@ def edit_message(request, pk):
 		}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/login/')
 def control_panel_email(request):
 	""" control panel - send email page for sending emails and editing mail configurations """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	config, created = MailConfiguration.objects.get_or_create(pk=1)
 	config_form = MailConfigurationForm(instance=config)
 	send_form = SendEmailForm()
@@ -174,9 +183,10 @@ def control_panel_email(request):
 			'send_form': send_form,
 		}, context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
 def send_email(request):
 	""" send infro letter via email """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
 	if request.method == "POST":
 		form = SendEmailForm(request.POST)
 		if form.is_valid():

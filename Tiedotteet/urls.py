@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 
 	# ckeditor
-	(r'^ckeditor/', include('ckeditor.urls')),
+	url(r'^ckeditor/', include('ckeditor.urls')),
 
 	# Django Admin
 	url(r'^super-admin/', include(admin.site.urls)),
