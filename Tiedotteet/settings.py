@@ -15,6 +15,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__)) + "/../"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -76,6 +78,12 @@ DATABASES = {
     }
 }
 
+TEMPLATE_DIRS = (
+    PROJECT_PATH + '/public/',
+    PROJECT_PATH + '/templates/',
+    PROJECT_PATH + '/info/templates/'
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -98,8 +106,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = '/vagrant/info/static/'
-STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    PROJECT_PATH + '/public/',
+    PROJECT_PATH + '/info/static/'
+]
+
+#STATIC_ROOT = PROJECT_PATH + '/public/'
+STATIC_URL = '/public/'
 
 
 MEDIA_ROOT = '/media/'

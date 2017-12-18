@@ -1,0 +1,58 @@
+@import 'loader.scss';
+@import 'header.scss';
+@import 'footer.scss';
+@import 'sidebar.scss';
+@import 'main_content.scss';
+@import 'article.scss';
+@import 'buttons.scss';
+
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+#wrapper {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/*
+a, a:visited {
+  color: #42b983;
+  text-decoration: none;
+}
+
+a:active {
+  color: #CCCCCC;
+}
+
+a:hover {
+  color: #FFFFFF;
+}
+
+h1 {
+  font-size: 1.6em;
+}
+h2 {
+  font-size: 1.3em;
+}
+p {
+  font-size: 1.0em;
+}
+*/
