@@ -1,19 +1,33 @@
-from rest_framework import generics, permissions
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import serializers
 from info.models import *
-from info.serializers import *
 
 
-class ContentList(generics.ListAPIView):
+class MessageSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
+    class Meta:
+        model = Message
+        fields = ('__all__')
+
+class CategorySerializer(serializers.ModelSerializer):
+    messages = serializers.SerializerMethodField()
+    class Meta:
+        model = Category
+        fields = ['id', 'title', 'order', 'messages']
+
+    def get_messages(self, category):
+        queryset = Message.visible_objects.filter(category=category)
+        serializer = MessageSerializer(queryset, many=True)
+        return serializer.data
+
+class ContentList(APIView):
     """
     List all visible content.
     """
-    visible_messages = Message.visible_objects.order_by('end_date')
-    queryset = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
-    serializer_class = ContentSerializer
-
-class MessageList(generics.ListAPIView):
-    """
-    List all visible messages.
-    """
-    queryset = Message.visible_objects.order_by('end_date')
-    serializer_class = MessageSerializer
+    def get(self, request, format=None):
+        visible_messages = Message.objects.all().order_by('end_date')
+        queryset = Category.objects.all().order_by('order')
+        serializer = CategorySerializer(queryset, many=True)
+        return Response(serializer.data)

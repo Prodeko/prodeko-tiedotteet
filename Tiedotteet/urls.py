@@ -39,6 +39,5 @@ urlpatterns = [
 
 	# API
 	url(r'^api/content/$', views_api.ContentList.as_view()),
-	url(r'^api/messages/$', views_api.MessageList.as_view()),
 
 ]
