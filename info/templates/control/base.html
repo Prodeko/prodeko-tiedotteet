@@ -10,6 +10,7 @@
 
 			<!-- Bootstrap Core CSS -->
 	    <link href="{% static 'control/css/bootstrap.min.css' %}" rel="stylesheet">
+			<link href="{% static 'control/css/plugins/bootstrap-select.min.css' %}" rel="stylesheet">
 
 	    <!-- Custom CSS -->
 			<link href="{% static 'control/css/sb-admin.css' %}" rel="stylesheet">
@@ -67,6 +68,9 @@
 													<a href="{% url 'categories' %}"><i class="fa fa-fw fa-pie-chart"></i> Kategoriat</a>
 											</li>
 											<li>
+													<a href="{% url 'tags' %}"><i class="fa fa-fw fa-tag"></i> Tagit</a>
+											</li>
+											<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#messages-control"><i class="fa fa-fw fa-table"></i> Tiedotteet <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="messages-control" class="collapse">
 														<li>
@@ -103,6 +107,7 @@
 
 	  <!-- Bootstrap Core JavaScript -->
 	  <script src="/static/control/js/bootstrap.min.js"></script>
+		<script src="/static/control/js/plugins/bootstrap-select.min.js"></script>
 
 		<!-- Delete confirmation -->
 		<script>

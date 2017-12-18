@@ -13,6 +13,11 @@ class MailConfiguration(models.Model):
 	use_tls = models.BooleanField(default=True)
 	fail_silently = models.BooleanField(default=True)
 
+class Tag(models.Model):
+	title = models.CharField(max_length=25, blank=True, null=True)
+
+	def __str__(self):
+		return smart_str(self.title)
 
 class Category(models.Model):
 	title = models.CharField(max_length=150, blank=True, null=True)
@@ -41,6 +46,7 @@ class Message(models.Model):
 	content = models.TextField()
 	pub_date = models.DateTimeField(default=timezone.now)
 	category = models.ForeignKey(Category, related_name='messages', null=True)
+	tags = models.ManyToManyField(Tag, related_name='messages', null=True, blank=True)
 	start_date = models.DateField(default=timezone.now)
 	end_date = models.DateField(default=timezone.now().date() + timedelta(days=7))
 	deadline_date = models.DateField(default=timezone.now().date() + timedelta(days=7), blank=True, null=True)

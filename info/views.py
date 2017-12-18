@@ -118,10 +118,33 @@ def new_category(request):
 	return redirect('/cp/categories/')
 
 
-def email(request):
-	""" email template """
+def tags(request):
+	""" control panel - edit tags """
 	if not request.user.is_superuser:
 		return HttpResponseForbidden()
+	tags = Tag.objects.all()
+	form = TagForm()
+	if request.method == "POST":
+		form = TagForm(request.POST)
+		if form.is_valid():
+			tag = form.save()
+			return redirect('/cp/tags/')
+	return render_to_response('control/tags.html',{
+			'tags':tags,
+			'form':form,
+		}, context_instance=RequestContext(request))
+
+def delete_tag(request, pk):
+	if not request.user.is_superuser:
+		return HttpResponseForbidden()
+	if request.method == 'POST':
+		tag = get_object_or_404(Tag, pk=pk)
+		tag.delete()
+	return redirect('/cp/tags/')
+
+
+def email(request):
+	""" email template """
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('email.html',{

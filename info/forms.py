@@ -3,16 +3,17 @@
 from django.forms import Form, ModelForm, TextInput, Textarea, DateField, Select, CheckboxInput, CharField, NumberInput, PasswordInput
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import AdminDateWidget
-from info.models import Message, Category, MailConfiguration
+from info.models import Message, Category, Tag, MailConfiguration
 
 class PublishForm(ModelForm):
 	class Meta:
 		model = Message
-		fields = ['header', 'content', 'category', 'start_date', 'end_date', 'deadline_date', 'show_deadline', 'visible']
+		fields = ['header', 'content', 'category', 'tags', 'start_date', 'end_date', 'deadline_date', 'show_deadline', 'visible']
 		labels = {
 			'header': _('Otsikko'),
 			'content': _('Sisältö'),
 			'category': _('Kategoria'),
+			'tags': _('Tagit'),
 			'start_date': _('Alkaa'),
 			'end_date': _('Loppuu'),
 			'deadline_date': _('Deadline'),
@@ -26,6 +27,7 @@ class PublishForm(ModelForm):
 			'end_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'deadline_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'category': Select(attrs={'class': 'form-control'}),
+			'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
 			'show_deadline': CheckboxInput(),
 			'visible': CheckboxInput(),
 		}
@@ -35,11 +37,12 @@ class EditForm(ModelForm):
 	class Meta:
 		model = Message
 		success_message = 'Tiedote päivitetty'
-		fields = ['header', 'content', 'category', 'start_date', 'end_date', 'deadline_date', 'show_deadline', 'visible']
+		fields = ['header', 'content', 'category', 'tags', 'start_date', 'end_date', 'deadline_date', 'show_deadline', 'visible']
 		labels = {
 			'header': _('Otsikko'),
 			'content': _('Content'),
 			'category': _('Kategoria'),
+			'tags': _('Tagit'),
 			'start_date': _('Alkaa'),
 			'end_date': _('Loppuu'),
 			'deadline_date': _('Deadline'),
@@ -53,6 +56,7 @@ class EditForm(ModelForm):
 			'end_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'deadline_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'category': Select(attrs={'class': 'form-control'}),
+			'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
 			'show_deadline': CheckboxInput(),
 			'visible': CheckboxInput(),
 		}
@@ -68,6 +72,17 @@ class CategoryForm(ModelForm):
 		widgets = {
 			'title': TextInput(attrs={'class': 'form-control'}),
 			'order': NumberInput(attrs={'class': 'form-control'}),
+		}
+
+class TagForm(ModelForm):
+	class Meta:
+		model = Tag
+		fields = ['title']
+		labels = {
+			'title': _('Uusi tagi'),
+		}
+		widgets = {
+			'title': TextInput(attrs={'class': 'form-control'}),
 		}
 
 
