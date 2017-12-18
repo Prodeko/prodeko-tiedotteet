@@ -6,7 +6,10 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from info import views, views_api
 
-urlpatterns = patterns('',
+urlpatterns = [
+
+    # index
+    url(r'^$', views.index, name='index'),
 
 	# Authentication
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
@@ -29,9 +32,6 @@ urlpatterns = patterns('',
 	url(r'^cp/email/$', views.control_panel_email, name="control_panel_email"),
 	url(r'^cp/email/send/$', views.send_email, name="send_email"),
 
-	# index
-	url(r'^$', views.index, name='index'),
-
 	# email template
 	url(r'^email/', views.email, name='email'),
 
@@ -39,6 +39,4 @@ urlpatterns = patterns('',
 	url(r'^api/content/$', views_api.ContentList.as_view()),
 	url(r'^api/messages/$', views_api.MessageList.as_view()),
 
-)
-
-urlpatterns = format_suffix_patterns(urlpatterns)
+]
