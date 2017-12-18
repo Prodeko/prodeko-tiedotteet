@@ -27,7 +27,7 @@ class PublishForm(ModelForm):
 			'end_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'deadline_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'category': Select(attrs={'class': 'form-control'}),
-			'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
+			'tags': SelectMultiple(attrs={'class': 'form-control'}),
 			'show_deadline': CheckboxInput(),
 			'visible': CheckboxInput(),
 		}
@@ -57,7 +57,6 @@ class EditForm(ModelForm):
 			'deadline_date': AdminDateWidget(attrs={'class': 'form-control input-md'}),
 			'category': Select(attrs={'class': 'form-control'}),
 			'tags': SelectMultiple(attrs={'class': 'form-control'}),
-			#'tags': Select(attrs={'class': 'form-control selectpicker', 'multiple': '', 'title': 'Ei valittuja tageja'}),
 			'show_deadline': CheckboxInput(),
 			'visible': CheckboxInput(),
 		}
@@ -65,14 +64,16 @@ class EditForm(ModelForm):
 class CategoryForm(ModelForm):
 	class Meta:
 		model = Category
-		fields = ['title', 'order',]
+		fields = ['title', 'order', 'login_required']
 		labels = {
 			'title': _('Kategoria'),
 			'order': _('Järjestys'),
+			'login_required': _('Näkyvyys'),
 		}
 		widgets = {
 			'title': TextInput(attrs={'class': 'form-control'}),
 			'order': NumberInput(attrs={'class': 'form-control'}),
+			'login_required': Select(attrs={'class': 'form-control'}, choices=((False, "Julkinen"), (True, "Vaatii kirjautumisen")))
 		}
 
 class TagForm(ModelForm):

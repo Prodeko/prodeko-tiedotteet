@@ -56,12 +56,14 @@
               <thead>
                 <th>Kategoria</th>
                 <th>Järjestys</th>
+                <th>Näkyvyys</th>
               </thead>
               <tbody>
                 {% for c in cforms %}
                 <tr>
                   <td>{{ c.title }}</td>
                   <td>{{ c.order }}</td>
+                  <td>{{ c.login_required }}</td>
                   <td>
                     {% if c.errors %}
                       <p class="text-danger">Virhe</p>

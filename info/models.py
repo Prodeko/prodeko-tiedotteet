@@ -22,6 +22,7 @@ class Tag(models.Model):
 class Category(models.Model):
 	title = models.CharField(max_length=150, blank=True, null=True)
 	order = models.IntegerField(default=0, blank=True, null=True)
+	login_required = models.BooleanField(default=False)
 
 	def __str__(self):
 		return smart_str(self.title)

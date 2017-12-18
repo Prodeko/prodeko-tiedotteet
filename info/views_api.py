@@ -39,5 +39,7 @@ class ContentList(APIView):
     def get(self, request, format=None):
         visible_messages = Message.objects.all().order_by('end_date')
         queryset = Category.objects.all().order_by('order')
+        if not request.user.is_authenticated():
+            queryset = queryset.exclude(login_required=True)
         serializer = CategorySerializer(queryset, many=True)
         return Response(serializer.data)
