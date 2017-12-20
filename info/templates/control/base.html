@@ -10,13 +10,12 @@
 
 			<!-- Bootstrap Core CSS -->
 	    <link href="{% static 'control/css/bootstrap.min.css' %}" rel="stylesheet">
-			<link href="{% static 'control/css/plugins/bootstrap-select.min.css' %}" rel="stylesheet">
 
 	    <!-- Custom CSS -->
 			<link href="{% static 'control/css/sb-admin.css' %}" rel="stylesheet">
 
 	    <!-- Custom Fonts -->
-	    <link href="/static/control/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    <link href="{% static 'control/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -103,11 +102,10 @@
 		<!-- /#wrapper -->
 
 		<!-- jQuery -->
-	  <script src="/static/control/js/jquery.js"></script>
+	  <script src="{% static 'control/js/jquery.js' %}"></script>
 
 	  <!-- Bootstrap Core JavaScript -->
-	  <script src="/static/control/js/bootstrap.min.js"></script>
-		<script src="/static/control/js/plugins/bootstrap-select.min.js"></script>
+		<script src="{% static 'control/js/bootstrap.min.js' %}"></script>
 
 		<!-- Delete confirmation -->
 		<script>
