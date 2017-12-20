@@ -4,12 +4,19 @@ import Moment from 'moment'
 import Article from '../../components/Article'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import LoginForm from '../../components/LoginForm'
+import LogoutForm from '../../components/LogoutForm'
 
 class MainContent extends Component {
   render() {
     const {sidebarWidth} = this.props
     return (
       <div id="main-content" className={this.props.additionalClasses}>
+        {window.user === "AnonymousUser" ?
+          <LoginForm/> :
+          <LogoutForm/>
+        }
+
         <Header/>
         <div>
           <div>

@@ -32,10 +32,11 @@ class CategorySerializer(serializers.ModelSerializer):
         serializer = MessageSerializer(queryset, many=True)
         return serializer.data
 
+
+"""
+List all visible content.
+"""
 class ContentList(APIView):
-    """
-    List all visible content.
-    """
     def get(self, request, format=None):
         visible_messages = Message.objects.all().order_by('end_date')
         queryset = Category.objects.all().order_by('order')
