@@ -93,7 +93,7 @@ SESSION_COOKIE_AGE = 15*60
 
 LOGIN_URL = '/login/'
 
-LANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
