@@ -141,6 +141,8 @@ def delete_tag(request, pk):
 
 def email(request):
 	""" email template """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden("Login required")
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('email.html',{
