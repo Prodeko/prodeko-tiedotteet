@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class LoginForm extends Component {
   render() {
     return (
-      <div id="login-form">
+      <div className="auth-form">
         <form method="post" action="/login/">
           <input type="hidden" name="csrfmiddlewaretoken" value={window.csrfToken}/>
           <input type="hidden" name="next" value="/"/>

@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 class LogoutForm extends Component {
   render() {
     return (
-      <div id="logout-form">
+      <div className="auth-form">
+        <div className="user-text">{window.user}</div>
         <form method="get" action="/logout/">
           <input type="hidden" name="next" value="/"/>
-          <input type="submit" value ="Logout"/>
+          <button type="submit">Logout</button>
         </form>
       </div>
     )

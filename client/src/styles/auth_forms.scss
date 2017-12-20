@@ -1,0 +1,19 @@
+.auth-form {
+  width: 100%;
+  background: #1E3553;
+  text-align: right;
+  form {
+    display: inline-block;
+  }
+  input[type=username], input[type="password"], button[type=submit], div.user-text {
+    padding: 8px 10px;
+    margin: 8px 4px;
+  }
+  button[type=submit] {
+
+  }
+  div.user-text {
+    display: inline-block;
+    color: #ffffff;
+  }
+}
