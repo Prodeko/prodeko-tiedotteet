@@ -35,7 +35,7 @@ export const markUnRead = (payload) => {
 export const fetchContent = () => {
   return {
     [CALL_API]: {
-      endpoint: '/api/content/',
+      endpoint: (process.env.NODE_ENV === 'production' ? '' : 'https://tiedotteet.prodeko.org') + '/api/content/',
       method: 'get',
       types: [REQUEST_CONTENT, REQUEST_CONTENT_SUCCESS, REQUEST_CONTENT_FAILURE]
     }

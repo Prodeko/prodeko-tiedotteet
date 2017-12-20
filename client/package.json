@@ -5,8 +5,8 @@
   "author": "Veikko Kovanen <veikko.kovanen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack -p --progress",
-    "start": "webpack-dev-server --open",
+    "build": "webpack -p --progress --env.NODE_ENV=production",
+    "start": "webpack --watch --env.NODE_ENV=development",
     "test": "find ./src -name '*.test.js' | xargs mocha --compilers js:babel-core/register --require ignore-styles ./test/configure.js -R spec"
   },
   "dependencies": {
