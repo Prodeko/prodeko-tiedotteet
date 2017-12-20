@@ -36,6 +36,12 @@ export const fetchContent = () => {
   return {
     [CALL_API]: {
       endpoint: (process.env.NODE_ENV === 'production' ? '' : 'https://tiedotteet.prodeko.org') + '/api/content/',
+      credentials: "same-origin",
+      headers: {
+        "X-CSRFToken": window.csrfToken,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
       method: 'get',
       types: [REQUEST_CONTENT, REQUEST_CONTENT_SUCCESS, REQUEST_CONTENT_FAILURE]
     }

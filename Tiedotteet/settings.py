@@ -123,3 +123,9 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication'
+    )
+}
