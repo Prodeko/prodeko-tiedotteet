@@ -3,14 +3,22 @@
   background: #1E3553;
   text-align: right;
   form {
+    width: 100%;
     display: inline-block;
   }
   input[type=username], input[type="password"], button[type=submit], div.user-text {
     padding: 8px 10px;
     margin: 8px 4px;
+    max-width: 30%;
   }
   button[type=submit] {
-
+    max-width: 20%;
+    background-color: #1E3553;
+    color: #ffffff;
+  }
+  button[type=submit]:hover {
+    cursor: pointer;
+    border-radius: 0px;
   }
   div.user-text {
     display: inline-block;
