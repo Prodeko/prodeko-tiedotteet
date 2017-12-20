@@ -14,7 +14,7 @@ class Sidebar extends Component {
     return (
       <aside id="sidebar" className={this.props.additionalClasses}>
         <div id="sidebar-content">
-        {this.props.content.data.map((d, key) => (
+        {this.props.content.data.filter(c => c.messages.length > 0).map((d, key) => (
           <div key={key}>
             <span className="sidebar-category">{d.title}</span>
             <ul className="sidebar-list">

@@ -13,7 +13,7 @@ class MainContent extends Component {
         <Header/>
         <div>
           <div>
-            {this.props.content.data.map((c,ckey) => {
+            {this.props.content.data.filter(c => c.messages.length > 0).map((c,ckey) => {
               return(
                 <div key={ckey}>
                   <h2>{c.title}</h2>
