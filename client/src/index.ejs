@@ -11,7 +11,7 @@
     <link rel="manifest" href="{% static 'manifest.json'%}">
     <link rel="icon" href="{% static 'assets/icon72.png'%}">
     <link rel="icon" href="{% static 'assets/icon72.png'%}">
-    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="stylesheet" href="{% static '<%= htmlWebpackPlugin.options.styleSheetName %>'%}">
   </head>
   <body>
     <div id="root"></div>
@@ -20,6 +20,6 @@
       window.user = "{{user}}";
       window.isAdmin = "{{user.is_superuser}}" === "True";
     </script>
-    <script type="text/javascript" src="{% static 'app.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static '<%= htmlWebpackPlugin.options.scriptFileName %>' %}"></script>
   </body>
 </html>

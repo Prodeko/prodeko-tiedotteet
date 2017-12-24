@@ -5,10 +5,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 
+const hash = Math.random().toString(36).substring(7, 13);
+
+const scriptFileName = `app.bundle_${hash}.js`
+const styleSheetName = `style_${hash}.css`
+
 module.exports = env => {
   return {
     entry: {
-      "app.bundle.js": './src/index.js'
+      [scriptFileName]: './src/index.js'
     },
     output: {
       filename: '[name]',
@@ -28,10 +33,12 @@ module.exports = env => {
       new CleanWebpackPlugin(['../public']),
       new HtmlWebpackPlugin({
         inject: false,
-        template: './src/index.ejs'
+        template: './src/index.ejs',
+        scriptFileName: scriptFileName,
+        styleSheetName: styleSheetName
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new ExtractTextPlugin('../public/style.css'),
+      new ExtractTextPlugin(`../public/style_${hash}.css`),
       new CopyWebpackPlugin([
         {from: 'src/manifest.json', to:'../public/manifest.json'},
         {from: 'src/assets/icons', to:'../public/assets'}
