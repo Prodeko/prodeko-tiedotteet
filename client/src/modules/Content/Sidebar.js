@@ -25,6 +25,8 @@ class Sidebar extends Component {
                   text={m.header}
                   isRead={isInStore(m.id)}
                   isNew={this.isNew(m.pub_date)}
+                  showDeadline={m.show_deadline}
+                  deadlineDate={m.deadline_date}
                 />
               ))}
             </ul>
