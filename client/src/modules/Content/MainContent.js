@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import Moment from 'moment'
 import Article from '../../components/Article'
 import Header from '../../components/Header'
+import TableOfContents from '../../components/TableOfContents'
 import Footer from '../../components/Footer'
 import LoginForm from '../../components/LoginForm'
 import LogoutForm from '../../components/LogoutForm'
 
 class MainContent extends Component {
   render() {
-    const {sidebarWidth} = this.props
     return (
       <div id="main-content" className={this.props.additionalClasses}>
         {window.user === "AnonymousUser" ?
@@ -18,6 +18,7 @@ class MainContent extends Component {
         }
 
         <Header/>
+        <TableOfContents content={this.props.content}/>
         <div>
           <div>
             {this.props.content.data.filter(c => c.messages.length > 0).map((c,ckey) => {
