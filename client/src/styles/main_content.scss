@@ -61,9 +61,13 @@
   padding-left: 1em;
   padding-right: 1em;
 
-  ul {
+  ul.main-list {
     list-style: none;
     padding: 0;
+  }
+  ul.sub-list {
+    padding-left: 1.5em;
+    list-style-type: square;
   }
   .category-title {
     font-weight: 700;

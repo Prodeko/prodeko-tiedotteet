@@ -6,9 +6,9 @@ class TableOfContents extends Component {
     return (
       <div id="table-of-contents">
         {this.props.content.data.map((category, key) =>  category.messages.length > 0 ? (
-          <ul key={key}>
+          <ul key={key} className="main-list">
             <li className="category-title">{category.title}</li>
-            <ul>
+            <ul className="sub-list">
               {category.messages.map((message, key) => (
                 <li key={key} className="message-title"><a href={`#${message.id}`}>{message.header}</a></li>
               ))}
