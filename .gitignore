@@ -6,3 +6,7 @@
 db.sqlite3
 migrations/
 public/
+node_modules/
+yarn.lock
+dist/
+.idea/
