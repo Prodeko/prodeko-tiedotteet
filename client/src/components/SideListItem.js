@@ -7,16 +7,16 @@ class SideListItem extends Component {
     return (
       <li className={`sidebar-list-item ${this.props.isRead ? 'read' : ''} ${this.props.isNew ? 'new' : ''}`}>
         <a htmlFor={this.props.id} href={`#${this.props.id}`}>
-          <div className="icon-container">
-            {this.props.isNew &&
+          {this.props.isNew &&
+            <div className="icon-container text-red">
               <span>New</span>
-            }
+            </div>
+          }
+          {this.props.showDeadline &&
+          <div className="icon-container text-light-grey">
+            <span>DL: {Moment(this.props.deadlineDate).format("D.M.Y")}</span>
           </div>
-          <div className="icon-container text-matt">
-            {!this.props.showDeadline &&
-              <span>DL: {Moment(this.props.deadlineDate).format("D.M.Y")}</span>
-            }
-          </div>
+          }
           <div className="text-container">
             {this.props.text}
           </div>

@@ -33,8 +33,29 @@ a, a:visited {
   overflow-x: hidden;
 }
 
+
+.text-grey {
+  color: $grey !important;
+}
+
+.text-light-grey{
+  color: $light-grey !important;
+}
+
 .text-matt {
   color: $matt !important;
+}
+
+.text-blue {
+  color: $blue !important;
+}
+
+.text-light-blue {
+  color: $light-blue !important;
+}
+
+.text-red {
+  color: $red !important;
 }
 
 /*
