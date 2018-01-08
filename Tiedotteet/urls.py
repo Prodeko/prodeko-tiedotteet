@@ -34,8 +34,9 @@ urlpatterns = [
 	url(r'^cp/email/$', views.control_panel_email, name="control_panel_email"),
 	url(r'^cp/email/send/$', views.send_email, name="send_email"),
 
-	# email template
+	# email and toc templates
 	url(r'^email/', views.email, name='email'),
+	url(r'^toc/', views.toc, name='toc'),
 
 	# API
 	url(r'^api/content/$', views_api.ContentList.as_view())

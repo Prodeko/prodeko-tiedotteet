@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="fi">
+    <head>
+        <title>Tiedotteet</title>
+    </head>
+    <body>
+        {% for c in categories %}
+        <ul>
+            <li>{{c.title}}</li>
+            <ul>
+                {% for m in c.visible_messages %}
+                <li>{{ m.header }}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+        {% endfor %}
+    </body>
+</html>
+
+

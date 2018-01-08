@@ -23,7 +23,7 @@ def index(request):
 def control_panel(request):
 	""" site for publishing new messages """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	form = PublishForm()
 	latest_messages = Message.objects.filter(visible=True).order_by('-pk')[:10]
 	if request.method == 'POST':
@@ -85,7 +85,7 @@ def control_messages(request, filter, category):
 def categories(request):
 	""" control panel - edit categories """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	categories = Category.objects.all()
 	cforms = [CategoryForm(prefix=str(x), instance=x) for x in categories]
 	nform = CategoryForm()
@@ -106,7 +106,7 @@ def categories(request):
 def new_category(request):
 	""" control panel - add new category """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if request.method == "POST":
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -117,7 +117,7 @@ def new_category(request):
 def tags(request):
 	""" control panel - edit tags """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	tags = Tag.objects.all()
 	form = TagForm()
 	if request.method == "POST":
@@ -132,7 +132,7 @@ def tags(request):
 
 def delete_tag(request, pk):
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if request.method == 'POST':
 		tag = get_object_or_404(Tag, pk=pk)
 		tag.delete()
@@ -142,16 +142,26 @@ def delete_tag(request, pk):
 def email(request):
 	""" email template """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('email.html',{
  		'categories': categories
  		}, context_instance=RequestContext(request))
 
+def toc(request):
+	""" toc """
+	if not request.user.is_superuser:
+		return HttpResponseForbidden("Admin login required")
+	visible_messages = Message.visible_objects.order_by('end_date')
+	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
+	return render_to_response('toc.html',{
+		'categories': categories
+	}, context_instance=RequestContext(request))
+
 def delete_message(request, pk):
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
 		message.delete()
@@ -159,7 +169,7 @@ def delete_message(request, pk):
 
 def hide_message(request, pk):
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if request.method == 'POST':
 		message = get_object_or_404(Message, pk=pk)
 		if message.visible:
@@ -171,7 +181,7 @@ def hide_message(request, pk):
 
 def edit_message(request, pk):
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	form = EditForm(instance=get_object_or_404(Message, pk=pk))
 	messages = {}
 	if request.method == 'POST':
@@ -189,7 +199,7 @@ def edit_message(request, pk):
 def control_panel_email(request):
 	""" control panel - send email page for sending emails and editing mail configurations """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	config, created = MailConfiguration.objects.get_or_create(pk=1)
 	config_form = MailConfigurationForm(instance=config)
 	send_form = SendEmailForm()
@@ -207,7 +217,7 @@ def control_panel_email(request):
 def send_email(request):
 	""" send infro letter via email """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if request.method == "POST":
 		form = SendEmailForm(request.POST)
 		if form.is_valid():
@@ -255,4 +265,4 @@ def send_email(request):
 			'success' : False,
 			'errors': dict(form.errors.items()),
 		})
-	return HttpResponseForbidden("Login required")
+	return HttpResponseForbidden("Admin login required")
