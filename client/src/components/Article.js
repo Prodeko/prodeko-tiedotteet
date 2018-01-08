@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 class Article extends Component {
   createMarkup = (htmlStr) => {
@@ -8,15 +9,17 @@ class Article extends Component {
   render() {
     const {id, pubDate, dlDate, title, text} = this.props
     return (
-      <div id={id} className="article">
-        <span className="pub-date">Published {pubDate}</span>
-        {dlDate &&
-          <span className="dl-date">Deadline {dlDate}</span>
-        }
-        <h3>{title}</h3>
-        <div dangerouslySetInnerHTML={this.createMarkup(text)}/>
-        <hr/>
-      </div>
+      <ScrollableAnchor id={id.toString()}>
+        <div className="article">
+          <span className="pub-date">Published {pubDate}</span>
+          {dlDate &&
+            <span className="dl-date">Deadline {dlDate}</span>
+          }
+          <h3>{title}</h3>
+          <div dangerouslySetInnerHTML={this.createMarkup(text)}/>
+          <hr/>
+        </div>
+      </ScrollableAnchor>
     )
   }
 }
