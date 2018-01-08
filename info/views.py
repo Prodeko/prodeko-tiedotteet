@@ -151,8 +151,6 @@ def email(request):
 
 def toc(request):
 	""" toc """
-	if not request.user.is_superuser:
-		return HttpResponseForbidden("Admin login required")
 	visible_messages = Message.visible_objects.order_by('end_date')
 	categories = Category.objects.filter(messages__in=visible_messages).distinct().order_by('order')
 	return render_to_response('toc.html',{
