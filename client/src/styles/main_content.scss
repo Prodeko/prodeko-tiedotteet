@@ -55,3 +55,17 @@
   padding-left: 1em;
   border-left: 0.1em solid $grey;
 }
+
+#table-of-contents {
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  .category-title {
+    font-weight: 700;
+  }
+}
