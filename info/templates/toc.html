@@ -9,7 +9,7 @@
             <li>{{c.title}}</li>
             <ul>
                 {% for m in c.visible_messages %}
-                <li>{{ m.header }}</li>
+                <li><a href="../#{{m.id}}">{{ m.header }}</a></li>
                 {% endfor %}
             </ul>
         </ul>
