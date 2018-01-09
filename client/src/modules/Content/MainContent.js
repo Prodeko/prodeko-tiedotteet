@@ -18,7 +18,7 @@ class MainContent extends Component {
         }
 
         <Header/>
-        <TableOfContents content={this.props.content}/>
+        <TableOfContents content={this.props.content} sendAnalyticsEvent={this.props.sendAnalyticsEvent}/>
         <div>
           <div>
             {this.props.content.data.filter(c => c.messages.length > 0).map((c,ckey) => {
@@ -50,7 +50,8 @@ class MainContent extends Component {
 
 MainContent.propTypes = {
   additionalClasses: PropTypes.string,
-  content: PropTypes.object.isRequired
+  content: PropTypes.object.isRequired,
+  sendAnalyticsEvent: PropTypes.func.isRequired
 }
 
 export default MainContent

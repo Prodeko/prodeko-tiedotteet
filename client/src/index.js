@@ -9,7 +9,7 @@ import {configureAnchors} from 'react-scrollable-anchor'
 configureAnchors({
   offset: 0,
   scrollDuration: 0,
-  keepLastAnchorHash: true
+  keepLastAnchorHash: false
 })
 
 render(

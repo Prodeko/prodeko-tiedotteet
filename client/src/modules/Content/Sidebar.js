@@ -27,6 +27,7 @@ class Sidebar extends Component {
                   isNew={this.isNew(m.pub_date)}
                   showDeadline={m.show_deadline}
                   deadlineDate={m.deadline_date}
+                  sendAnalyticsEvent={this.props.sendAnalyticsEvent}
                 />
               ))}
             </ul>
@@ -42,7 +43,8 @@ Sidebar.propTypes = {
   content: PropTypes.object.isRequired,
   markRead: PropTypes.func.isRequired,
   markUnRead: PropTypes.func.isRequired,
-  additionalClasses: PropTypes.string
+  additionalClasses: PropTypes.string,
+  sendAnalyticsEvent: PropTypes.func.isRequired
 }
 
 export default Sidebar

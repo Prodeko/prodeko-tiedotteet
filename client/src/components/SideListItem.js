@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import Moment from 'moment'
 
 class SideListItem extends Component {
+
+  handleClick = () => {
+    this.props.sendAnalyticsEvent('Sidebar', 'click', null, this.props.id)
+  }
+
   render() {
     return (
       <li className={`sidebar-list-item ${this.props.isRead ? 'read' : ''} ${this.props.isNew ? 'new' : ''}`}>
-        <a htmlFor={this.props.id} href={`#${this.props.id}`}>
+        <a htmlFor={this.props.id} href={`#${this.props.id}`} onClick={this.handleClick}>
           {this.props.isNew &&
             <div className="icon-container text-red">
               <span>New</span>
@@ -32,7 +37,8 @@ SideListItem.propTypes = {
   text: PropTypes.string.isRequired,
   isNew: PropTypes.bool.isRequired,
   showDeadline: PropTypes.bool.isRequired,
-  deadlineDate: PropTypes.string.isRequired
+  deadlineDate: PropTypes.string.isRequired,
+  sendAnalyticsEvent: PropTypes.func.isRequired
 }
 
 export default SideListItem
