@@ -41,7 +41,8 @@ module.exports = env => {
       new ExtractTextPlugin(`../public/style_${hash}.css`),
       new CopyWebpackPlugin([
         {from: 'src/manifest.json', to:'../public/manifest.json'},
-        {from: 'src/assets/icons', to:'../public/assets'}
+        {from: 'src/assets/icons', to:'../public/assets'},
+        {from: 'src/serviceWorker.js', to: '../public/serviceWorker.js'}
       ])
     ],
     externals: {
