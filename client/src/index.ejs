@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html>
+<html lang="fi">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <title>Tiedotteet</title>
@@ -12,9 +12,6 @@
     <link rel="icon" href="{% static 'assets/icon72.png'%}">
     <link rel="icon" href="{% static 'assets/icon72.png'%}">
     <link rel="stylesheet" href="{% static '<%= htmlWebpackPlugin.options.styleSheetName %>'%}">
-  </head>
-  <body>
-    <div id="root"></div>
     <script>
       window.csrfToken = "{{csrf_token}}";
       window.user = "{{user}}";
@@ -26,6 +23,10 @@
       ga('send', 'pageview');
     </script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+  </head>
+  <body>
+    <noscript>This site requires JavaScript turned on</noscript>
+    <div id="root"></div>
     <script type="text/javascript" src="{% static '<%= htmlWebpackPlugin.options.scriptFileName %>' %}"></script>
   </body>
 </html>

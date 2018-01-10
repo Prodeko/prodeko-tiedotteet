@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 class LoginForm extends Component {
   render() {
@@ -8,8 +7,8 @@ class LoginForm extends Component {
         <form method="post" action="/login/">
           <input type="hidden" name="csrfmiddlewaretoken" value={window.csrfToken}/>
           <input type="hidden" name="next" value="/"/>
-          <input type="username" name="username"/>
-          <input type="password" name="password"/>
+          <input type="username" name="username" placeholder="Username" title="Username"/>
+          <input type="password" name="password" placeholder="Password" title="Password"/>
           <button type="submit">Login</button>
         </form>
       </div>
