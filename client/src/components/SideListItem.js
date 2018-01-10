@@ -1,29 +1,31 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'moment'
+import {isInStore} from '../util/localStorage'
 
 class SideListItem extends Component {
 
   handleClick = () => {
-    this.props.sendAnalyticsEvent('Sidebar', 'click', null, this.props.id)
+    this.props.sendAnalyticsEvent('sidebar link', 'click', this.props.message.header, this.props.message.isNew ? 1 : 0)
   }
 
   render() {
+    const m = this.props.message
     return (
-      <li className={`sidebar-list-item ${this.props.isRead ? 'read' : ''} ${this.props.isNew ? 'new' : ''}`}>
-        <a htmlFor={this.props.id} href={`#${this.props.id}`} onClick={this.handleClick}>
-          {this.props.isNew &&
+      <li className={`sidebar-list-item ${isInStore(m.id) ? 'read' : ''} ${m.isNew ? 'new' : ''}`}>
+        <a htmlFor={m.id} href={`#${m.id}`} onClick={this.handleClick}>
+          {m.isNew &&
             <div className="icon-container text-red">
               <span>New</span>
             </div>
           }
-          {this.props.showDeadline &&
+          {m.showDeadline &&
           <div className="icon-container text-light-grey">
-            <span>DL: {Moment(this.props.deadlineDate).format("D.M.Y")}</span>
+            <span>DL: {Moment(m.deadlineDate).format("D.M.Y")}</span>
           </div>
           }
           <div className="text-container">
-            {this.props.text}
+            {m.header}
           </div>
         </a>
       </li>
@@ -32,12 +34,7 @@ class SideListItem extends Component {
 }
 
 SideListItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  isRead: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
-  isNew: PropTypes.bool.isRequired,
-  showDeadline: PropTypes.bool.isRequired,
-  deadlineDate: PropTypes.string.isRequired,
+  message: PropTypes.object.isRequired,
   sendAnalyticsEvent: PropTypes.func.isRequired
 }
 

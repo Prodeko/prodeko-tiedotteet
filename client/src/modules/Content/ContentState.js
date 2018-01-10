@@ -1,5 +1,5 @@
-import {CALL_API} from 'redux-api-middleware'
 import {addToStorage, removeFromStorage} from '../../util/localStorage'
+import {isNew} from '../../util/timeUtils'
 
 // Initial state
 const initialState = {
@@ -9,13 +9,24 @@ const initialState = {
 }
 
 // Actions
-export const REQUEST_CONTENT = 'CONTENT/REQUEST_CONTENT'
+const REQUEST_CONTENT = 'CONTENT/REQUEST_CONTENT'
+const requestContent = () => ({
+  type: REQUEST_CONTENT
+})
+
 export const REQUEST_CONTENT_SUCCESS = 'CONTENT/REQUEST_CONTENT_SUCCESS'
+const requestContentSuccess = (payload) => ({
+  type: REQUEST_CONTENT_SUCCESS,
+  payload
+})
+
 export const REQUEST_CONTENT_FAILURE = 'CONTENT/REQUEST_CONTENT_FAILURE'
+const requestContentFailure = (payload) => ({
+  type: REQUEST_CONTENT_FAILURE,
+  payload
+})
 
 export const MARK_READ = 'CONTENT/MARK_READ'
-export const MARK_UNREAD = 'CONTENT/MARK_UNREAD'
-
 export const markRead = (payload) => {
   addToStorage(payload)
   return {
@@ -24,6 +35,7 @@ export const markRead = (payload) => {
   }
 }
 
+export const MARK_UNREAD = 'CONTENT/MARK_UNREAD'
 export const markUnRead = (payload) => {
   removeFromStorage(payload)
   return {
@@ -33,20 +45,25 @@ export const markUnRead = (payload) => {
 }
 
 export const fetchContent = () => {
-  return {
-    [CALL_API]: {
-      endpoint: (process.env.NODE_ENV === 'production' ? '' : 'https://tiedotteet.prodeko.org') + '/api/content/',
+  return (dispatch) => {
+    dispatch(requestContent())
+    const url = (process.env.NODE_ENV === 'production' ? '' : 'https://tiedotteet.prodeko.org') + '/api/content/'
+    fetch(url, {
       credentials: "same-origin",
       headers: {
         "X-CSRFToken": window.csrfToken,
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
-      method: 'get',
-      types: [REQUEST_CONTENT, REQUEST_CONTENT_SUCCESS, REQUEST_CONTENT_FAILURE]
-    }
+      method: 'get'
+    }).then(response => response.json().then(json => {
+      const data = json.map(category => ({...category, messages: category.messages.map(message => ({...message, isNew: isNew(message.pub_date)}))}))
+      dispatch(requestContentSuccess(data))
+    }))
+      .catch(error => dispatch(requestContentFailure(error)))
   }
 }
+
 
 // Reducer
 export const ContentStateReducer = (state = initialState, action = {}) => {

@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SideListItem from '../../components/SideListItem'
-import {isInStore} from '../../util/localStorage'
 
 class Sidebar extends Component {
-  isNew = (pubDate) => {
-    const today = new Date()
-    const date = new Date(pubDate)
-    const diff = Math.round((today-date)/(1000*60*60*24))
-    return diff < 3
-  }
   render() {
     return (
       <aside id="sidebar" className={this.props.additionalClasses}>
@@ -21,12 +14,7 @@ class Sidebar extends Component {
               {d.messages.map((m,key) => (
                 <SideListItem
                   key={key}
-                  id={m.id}
-                  text={m.header}
-                  isRead={isInStore(m.id)}
-                  isNew={this.isNew(m.pub_date)}
-                  showDeadline={m.show_deadline}
-                  deadlineDate={m.deadline_date}
+                  message={m}
                   sendAnalyticsEvent={this.props.sendAnalyticsEvent}
                 />
               ))}

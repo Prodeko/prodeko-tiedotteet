@@ -17,6 +17,7 @@ export const sendAnalyticsEvent = (category, action, label, value) => {
     hitType: 'event',
     eventCategory: category,
     eventAction: action,
+    eventLabel: label,
     eventValue: value
   })
   return (dispatch) => {

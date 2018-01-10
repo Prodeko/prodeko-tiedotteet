@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 class TableOfContents extends Component {
 
-  handleClick = (messageId) => {
-    this.props.sendAnalyticsEvent('Table of Contents', 'click', null, messageId)
+  handleClick = (messageHeader, messageIsNew) => {
+    this.props.sendAnalyticsEvent('table of contents link', 'click', messageHeader, messageIsNew ? 1 : 0)
   }
 
   render() {
@@ -16,7 +16,7 @@ class TableOfContents extends Component {
             <ul className="sub-list">
               {category.messages.map((message, key) => (
                 <li key={key} className="message-title">
-                  <a href={`#${message.id}`} onClick={() => this.handleClick(message.id)}>{message.header}</a>
+                  <a href={`#${message.id}`} onClick={() => this.handleClick(message.header, message.isNew)}>{message.header}</a>
                 </li>
               ))}
             </ul>
