@@ -1,6 +1,5 @@
 from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect, get_object_or_404, HttpResponse
 from django.http import HttpResponseNotFound, HttpResponseForbidden, JsonResponse
-from django.conf import settings
 from django.template import RequestContext, Context
 from django.template.loader import render_to_string, get_template
 from datetime import datetime, timedelta
@@ -40,7 +39,7 @@ def control_panel(request):
 def control_messages(request, filter, category):
 	""" control panel - list messages """
 	if not request.user.is_superuser:
-		return HttpResponseForbidden("Login required")
+		return HttpResponseForbidden("Admin login required")
 	if filter == 'now':
 		messages = Message.objects.filter(end_date__gte=timezone.now()).order_by('-pk')
 		filter_label = 'Nykyiset'
