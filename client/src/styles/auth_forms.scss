@@ -1,6 +1,7 @@
+@import 'variables.scss';
 .auth-form {
   width: 100%;
-  background: #1E3553;
+  background-color: $blue;
   text-align: right;
   form {
     width: 100%;
@@ -13,7 +14,7 @@
     font-size: 16px;
   }
   button[type=submit] {
-    background-color: #1E3553;
+    background-color: $blue;
     color: #ffffff;
   }
   button[type=submit]:hover {
