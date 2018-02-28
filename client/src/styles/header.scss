@@ -8,16 +8,15 @@
   opacity: 0.5;
   margin-bottom: 3em;
   /* The image used */
-  //background-image: url('public/assets/banner.png');
+  background-image: url('../assets/banner.png');
 
   /* Full height and width */
-  //height: 100%;
-  //width: 100%;
+  width: 100%;
 
   /* Center and scale the image nicely */
-  //background-position: center;
-  //background-repeat: no-repeat;
-  //background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #header span {
