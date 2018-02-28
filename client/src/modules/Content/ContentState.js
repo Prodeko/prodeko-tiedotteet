@@ -1,5 +1,4 @@
 import {addToStorage, removeFromStorage} from '../../util/localStorage'
-import {isNew} from '../../util/timeUtils'
 
 // Initial state
 const initialState = {
