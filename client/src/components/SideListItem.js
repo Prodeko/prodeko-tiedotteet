@@ -14,14 +14,14 @@ class SideListItem extends Component {
     return (
       <li className={`sidebar-list-item ${isInStore(m.id) ? 'read' : ''} ${m.isNew ? 'new' : ''}`}>
         <a htmlFor={m.id} href={`#${m.id}`} onClick={this.handleClick}>
-          {m.isNew &&
+          {m.is_new &&
             <div className="icon-container text-red">
               <span>New</span>
             </div>
           }
-          {m.showDeadline &&
+          {m.show_deadline &&
           <div className="icon-container text-light-grey">
-            <span>DL: {Moment(m.deadlineDate).format("D.M.Y")}</span>
+            <span>DL: {Moment(m.deadline_date).format("D.M.Y")}</span>
           </div>
           }
           <div className="text-container">

@@ -13,6 +13,7 @@ class TagSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField()
     tags = serializers.SerializerMethodField()
+    is_new = serializers.SerializerMethodField()
     class Meta:
         model = Message
         fields = ('__all__')
@@ -20,6 +21,9 @@ class MessageSerializer(serializers.ModelSerializer):
     def get_tags(self, message):
         queryset = message.tags.all()
         return queryset.values_list("title", flat=True)
+
+    def get_is_new(self, message):
+        return message.is_new()
 
 class CategorySerializer(serializers.ModelSerializer):
     messages = serializers.SerializerMethodField()
@@ -38,7 +42,6 @@ List all visible content.
 """
 class ContentList(APIView):
     def get(self, request, format=None):
-        visible_messages = Message.objects.all().order_by('end_date')
         queryset = Category.objects.all().order_by('order')
         if not request.user.is_authenticated():
             queryset = queryset.exclude(login_required=True)

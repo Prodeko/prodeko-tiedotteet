@@ -57,8 +57,7 @@ export const fetchContent = () => {
       },
       method: 'get'
     }).then(response => response.json().then(json => {
-      const data = json.map(category => ({...category, messages: category.messages.map(message => ({...message, isNew: isNew(message.pub_date)}))}))
-      dispatch(requestContentSuccess(data))
+      dispatch(requestContentSuccess(json))
     }))
       .catch(error => dispatch(requestContentFailure(error)))
   }
