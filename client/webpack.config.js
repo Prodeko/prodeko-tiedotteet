@@ -18,7 +18,7 @@ module.exports = env => {
     output: {
       filename: '[name]',
       path: path.resolve(__dirname, '../public'),
-      publicPath: '/'
+      publicPath: '/public/'
     },
     devtool: env.NODE_ENV === 'production' ? false : 'inline-source-map',
     devServer: {
@@ -30,7 +30,7 @@ module.exports = env => {
       }
     },
     plugins: [
-      new CleanWebpackPlugin(['../public']),
+      new CleanWebpackPlugin(['public'], {root: path.resolve(__dirname, '../')}),
       new HtmlWebpackPlugin({
         inject: false,
         template: './src/index.ejs',
