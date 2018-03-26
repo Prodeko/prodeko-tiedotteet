@@ -1,7 +1,7 @@
 # Installation and Development
 
 ## Requirements
-Install [vagrant](https://www.vagrantup.com/),  [VirtualBox](https://www.virtualbox.org/) and [NodeJS](https://nodejs.org/en/) or [yarn](https://yarnpkg.com/en/).
+Install [Vagrant](https://www.vagrantup.com/), [VirtualBox](https://www.virtualbox.org/) and [NodeJS](https://nodejs.org/en/) or [yarn](https://yarnpkg.com/en/).
 
 ## Introduction
 Anyone who might find this application useful is free to fork the project and
