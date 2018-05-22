@@ -1,5 +1,4 @@
 
-const ANALYTICS_ENABLED = false;
 
 // Actions
 const SEND_EVENT = 'ANALYTICS/SEND_EVENT'
