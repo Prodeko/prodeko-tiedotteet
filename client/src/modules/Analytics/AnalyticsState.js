@@ -1,4 +1,5 @@
 
+const ANALYTICS_ENABLED = false;
 
 // Actions
 const SEND_EVENT = 'ANALYTICS/SEND_EVENT'
@@ -13,6 +14,7 @@ const sendEvent = (category, action, label, value) => {
 }
 
 export const sendAnalyticsEvent = (category, action, label, value) => {
+  /* Uncomment to enable analytics.
   ga('send', {
     hitType: 'event',
     eventCategory: category,
@@ -20,6 +22,7 @@ export const sendAnalyticsEvent = (category, action, label, value) => {
     eventLabel: label,
     eventValue: value
   })
+  */
   return (dispatch) => {
     dispatch(sendEvent(category, action, label, value))
   }
