@@ -5,14 +5,17 @@
     </head>
     <body>
         {% for c in categories %}
-        <ul style="list-style-type:none">
-            <li><strong>{{c.title}}</strong></li>
+        <div>
+            <span><strong>{{c.title}}</strong></span>
             <ul>
                 {% for m in c.visible_messages %}
-                <li><a href="../#{{m.id}}">{{ m.header }} {% if m.is_new %}<i>(new)</i>{% endif %}</a></li>
+                <li><a href="../#{{m.id}}">{{ m.header }} {% if m.is_new %}<strong><i>(new)</i></strong>{% endif %}</a></li>
+                {% if forloop.last %}
+                    <br />
+                {% endif %}
                 {% endfor %}
             </ul>
-        </ul>
+        </div>
         {% endfor %}
     </body>
 
