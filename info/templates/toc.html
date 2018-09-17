@@ -5,11 +5,11 @@
     </head>
     <body>
         {% for c in categories %}
-        <ul>
-            <li>{{c.title}}</li>
+        <ul style="list-style-type:none">
+            <li><strong>{{c.title}}</strong></li>
             <ul>
                 {% for m in c.visible_messages %}
-                <li><a href="../#{{m.id}}">{{ m.header }} {% if m.is_new %}(new){% endif %}</a></li>
+                <li><a href="../#{{m.id}}">{{ m.header }} {% if m.is_new %}<i>(new)</i>{% endif %}</a></li>
                 {% endfor %}
             </ul>
         </ul>

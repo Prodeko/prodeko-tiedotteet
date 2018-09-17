@@ -1,8 +1,7 @@
-from rest_framework import status
+from info.models import *
+from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import serializers
-from info.models import *
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -10,10 +9,12 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ['title']
 
+
 class MessageSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField()
     tags = serializers.SerializerMethodField()
     is_new = serializers.SerializerMethodField()
+
     class Meta:
         model = Message
         fields = ('__all__')
@@ -25,8 +26,10 @@ class MessageSerializer(serializers.ModelSerializer):
     def get_is_new(self, message):
         return message.is_new()
 
+
 class CategorySerializer(serializers.ModelSerializer):
     messages = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
         fields = ['id', 'title', 'order', 'messages']
@@ -40,6 +43,8 @@ class CategorySerializer(serializers.ModelSerializer):
 """
 List all visible content.
 """
+
+
 class ContentList(APIView):
     def get(self, request, format=None):
         queryset = Category.objects.all().order_by('order')

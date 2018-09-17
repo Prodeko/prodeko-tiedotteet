@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
+
 from django import template
 from django.template.defaultfilters import stringfilter
-from datetime import date
 
 register = template.Library()
 

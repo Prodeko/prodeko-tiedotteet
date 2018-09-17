@@ -32,7 +32,7 @@ TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = [
     '.prodeko.org',  # Allow domain and subdomains
     '.prodeko.org.',  # Also allow FQDN and subdomains
-	'127.0.0.1',
+    '127.0.0.1',
 ]
 
 
@@ -89,7 +89,7 @@ TEMPLATE_DIRS = (
 
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 60*60*24*30 # 30 days
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
 
 LOGIN_URL = '/login/'
 
