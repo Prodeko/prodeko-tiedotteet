@@ -10,9 +10,6 @@
             <ul>
                 {% for m in c.visible_messages %}
                 <li><a href="../#{{m.id}}">{{ m.header }} {% if m.is_new %}<strong><i>(new)</i></strong>{% endif %}</a></li>
-                {% if forloop.last %}
-                    <br />
-                {% endif %}
                 {% endfor %}
             </ul>
         </div>
