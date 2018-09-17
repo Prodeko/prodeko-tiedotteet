@@ -7,7 +7,9 @@ class Footer extends Component {
       <div id="footer">
         <img src={"/public/assets/prodeko.png"} alt="Prodeko"/>
         <hr/>
-        <span><a href="https://www.prodeko.org/tietosuojakaytanto/">Prodekon tietosuojakäytäntö</a></span>
+        <div id="footer-policy">
+          <span><a href="https://www.prodeko.org/tietosuojakaytanto/">Prodekon tietosuojakäytäntö</a></span>
+        </div>
       </div>
     )
   }

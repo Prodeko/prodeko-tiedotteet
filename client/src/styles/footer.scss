@@ -4,15 +4,22 @@
   background-color: $white;
   color: $white;
   opacity: 0.8;
-  margin-top: 3em;
   padding: 3em 0;
+  margin-top: 3em;
 }
 
 #footer span {
   font-size: 1.6em;
 }
 
+#footer-policy {
+  text-align: center;
+}
+
 #footer img {
   max-width: 70%;
   height: auto;
+  margin: 0 auto;
+  padding: 2em;
+	display: block;
 }
