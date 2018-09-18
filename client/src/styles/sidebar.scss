@@ -13,11 +13,11 @@
   transition-property: left;
   transition-duration: 0.5s;
 
-  .open {
+  &.open {
     left: 0;
   }
 
-  .closed {
+  &.closed {
     left: -$sidebar-width;
   }
 

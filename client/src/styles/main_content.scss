@@ -16,12 +16,12 @@
   }
 
   &.display-mobile{
-    &.sidebar-open {
+    .sidebar-open {
       margin-left: $sidebar-width;
       margin-right: -1 * $sidebar-width;
     }
 
-    &.sidebar-closed {
+    .sidebar-closed {
       margin-left: 0;
     }
   }

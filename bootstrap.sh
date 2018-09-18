@@ -49,7 +49,7 @@ cd /vagrant && python manage.py syncdb --noinput
 cd /vagrant && python manage.py migrate
 
 # creating an admin user
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(email='webbitiimi@prodeko.org').delete(); User.objects.create_superuser('webbitiimi, ''webbitiimi@prodeko.org', 'kananugetti')" | python manage.py shell
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(email='webbitiimi@prodeko.org').delete(); User.objects.create_superuser('webbitiimi', 'webbitiimi@prodeko.org', 'kananugetti')" | python manage.py shell
 
 # Run server and static file watcher in screen
 su - vagrant -c "cd /vagrant && screen -S server -d -m python manage.py runserver 0.0.0.0:8000"
