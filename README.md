@@ -1,4 +1,4 @@
-# Prodeko Tiedotteet
+# Prodeko Tiedotteet :newspaper:
 
 Django + React powered application for publishing Prodeko's weekly bulletin.
 
